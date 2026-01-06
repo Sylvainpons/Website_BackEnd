@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, func
 from sqlalchemy.orm import relationship
 from app.db.base import Base
-
+# Define the Category model
 class Category(Base):
     __tablename__ = "categories"
 
@@ -9,9 +9,9 @@ class Category(Base):
     name = Column(String(256), nullable=False, unique=True)
     slug = Column(String(256), nullable=False, unique=True)
     created_at = Column(DateTime, server_default=func.now())
-
+    # Relationships
     subcategories = relationship("SubCategory", back_populates="category")
     items = relationship("Item", back_populates="category")
-
+    # Representation method
     def __repr__(self):
         return f"<Category id={self.id} name={self.name}>"
