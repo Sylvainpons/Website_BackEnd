@@ -9,7 +9,7 @@ from app.schemas.item import ItemCreate, ItemUpdate, ItemRead
 
 router = APIRouter(
     prefix="/items",
-    tags=["Items"]
+    tags=["items"]
 )
 
 # ----------------

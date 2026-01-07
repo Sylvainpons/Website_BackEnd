@@ -18,6 +18,7 @@ class ItemUpdate(BaseModel):
 	subcategory_id:int |None = None
 
 class ItemRead(BaseModel):
+	id: int
 	title:str
 	description:str
 	year:int

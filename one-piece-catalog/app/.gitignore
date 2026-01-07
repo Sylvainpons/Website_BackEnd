@@ -1,0 +1,9 @@
+.env
+.github/
+.python-version
+README.md
+app.old.py
+__pycache__/
+pyproject.toml
+requirements.txt
+uv.lock

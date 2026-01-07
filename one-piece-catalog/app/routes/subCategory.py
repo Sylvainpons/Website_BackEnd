@@ -32,7 +32,6 @@ def create_subcategory(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Category does not exist"
         )
-    subCategory.category_id = data.category_id
 
     subcategory=SubCategory(
         name=data.name,
