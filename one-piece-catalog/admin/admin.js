@@ -131,7 +131,7 @@ document.getElementById("item-form")?.addEventListener("submit", async (e) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       title,
-      description: "Ajout back-office",
+      description,
       year: new Date().getFullYear(),
       external_link: "",
       category_id: parseInt(category_id),

@@ -163,57 +163,64 @@ async function loadSubcategories(categoryId) {
 
 /* =====================================================
    ITEM CREATE + IMAGE UPLOAD
-===================================================== */
+  ===================================================== */
 document.getElementById("item-form")?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const title = document.getElementById("title").value;
-  const category_id = document.getElementById("categorySelect").value;
-  const subcategory_id = document.getElementById("subcategorySelect").value;
+  // Récupération des champs
+  const title = document.getElementById("title")?.value?.trim() || "";
+  const descInput = document.getElementById("description");
+  const description = descInput ? descInput.value.trim() : "";
+  
+  const yearInput = document.getElementById("year");
+  const year = yearInput?.value 
+    ? parseInt(yearInput.value.split("-")[0], 10) 
+    : new Date().getFullYear();
 
-  // Validation côté client
+  const category_id = document.getElementById("categorySelect")?.value;
+  const subcategory_id = document.getElementById("subcategorySelect")?.value;
+
+  // Debug très important (garde-le quelques temps)
+  console.log("Valeurs envoyées au serveur :");
+  console.log({ title, description, year, category_id, subcategory_id });
+
+  // Validation
   if (!title || !category_id || !subcategory_id) {
     alert("Veuillez remplir tous les champs obligatoires");
     return;
   }
 
   try {
-    // 1️⃣ Créer l'item
-    console.log("Création item avec:", {
-      title,
-      category_id: parseInt(category_id),
-      subcategory_id: parseInt(subcategory_id)
-    });
-
+    // 1. Création de l'item
     const res = await fetch(`${API}/items`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title,
-        description: "Ajout back-office",
-        year: new Date().getFullYear(),
+        description,          // ← sera "" si pas de champ description
+        year,                 // ← nombre correct ou année actuelle
         external_link: "",
-        category_id: parseInt(category_id),
-        subcategory_id: parseInt(subcategory_id),
+        category_id: Number(category_id),
+        subcategory_id: Number(subcategory_id),
       }),
     });
 
     if (!res.ok) {
       const error = await res.json();
-      console.error("Erreur API:", error);
-      alert(`Erreur création item: ${error.detail || 'Erreur inconnue'}`);
+      console.error("Erreur API création item:", error);
+      alert(`Erreur création item: ${error.detail || "Erreur inconnue"}`);
       return;
     }
 
     const item = await res.json();
-    console.log("Item créé:", item);
+    console.log("Item créé avec succès:", item);
 
-    // 2️⃣ Upload image (optionnel)
+    // 2. Upload image (optionnel)
     const fileInput = document.getElementById("image");
-    const file = fileInput?.files[0];
-    
+    const file = fileInput?.files?.[0];
+
     if (file) {
-      console.log("Upload de l'image:", file.name);
+      console.log("Envoi de l'image:", file.name);
       const formData = new FormData();
       formData.append("file", file);
 
@@ -226,28 +233,23 @@ document.getElementById("item-form")?.addEventListener("submit", async (e) => {
       );
 
       if (!imgRes.ok) {
-        const error = await imgRes.json();
-        console.error("Erreur upload image:", error);
-        alert(`Item créé (ID: ${item.id}) mais erreur upload image: ${error.detail || 'Erreur inconnue'}`);
-        e.target.reset();
-        return;
+        const imgError = await imgRes.json().catch(() => ({}));
+        console.error("Erreur upload image:", imgError);
+        alert(`Item créé (ID: ${item.id}) mais échec upload image`);
+      } else {
+        console.log("Image uploadée OK");
       }
-
-      console.log("Image uploadée avec succès");
-      alert(`Item créé avec succès (ID: ${item.id}) avec image`);
-    } else {
-      alert(`Item créé avec succès (ID: ${item.id}) sans image`);
     }
 
+    alert(`Item créé avec succès ! (ID: ${item.id})`);
     e.target.reset();
-    
-    // Recharger les selects pour garder les options
-    const categorySelect = document.getElementById("categorySelect");
-    if (categorySelect && categorySelect.value) {
-      await loadSubcategories(categorySelect.value);
+
+    // Rechargement des sous-catégories si besoin
+    if (category_id) {
+      await loadSubcategories(category_id);
     }
   } catch (error) {
-    console.error("Erreur réseau:", error);
-    alert(`Erreur réseau lors de la création: ${error.message}`);
+    console.error("Erreur réseau ou critique:", error);
+    alert("Erreur lors de la création\n\nRegarde la console pour plus d'infos");
   }
 });

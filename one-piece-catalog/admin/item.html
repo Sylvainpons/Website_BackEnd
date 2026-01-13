@@ -1,8 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Back Office – One Piece</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
 <h2>Ajouter un item</h2>
 
 <form id="item-form">
   <input type="text" id="title" placeholder="Titre de l’item" required />
-
+   <label for="description">Description</label>
+  <textarea 
+    id="description" 
+    name="description" 
+    rows="4" 
+    placeholder="Décris l'article... (optionnel)"
+  ></textarea>
+<!--   <input type="text" id="year" placeholder="Année de création" required />
+ -->
+  <label for="year">Année *</label>
+  <input 
+    type="month" 
+    id="year" 
+    name="year" 
+    required 
+    min="1900-01" 
+    max="2030-12"           
+  >
   <select id="categorySelect"></select>
   <select id="subcategorySelect"></select>
 
@@ -12,3 +38,5 @@
 <a href="index.html">Retour</a>
 
 <script src="item.js"></script>
+</body>
+</html>

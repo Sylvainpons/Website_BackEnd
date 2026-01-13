@@ -10,7 +10,6 @@ class Item(Base):
     description = Column(String(1024))
     year = Column(Integer)
     external_link = Column(String(512))
-
     category_id = Column(Integer, ForeignKey("categories.id"), nullable=False)
     subcategory_id = Column(Integer, ForeignKey("subcategories.id"), nullable=False)
 
