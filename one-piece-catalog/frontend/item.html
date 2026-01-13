@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détails Item - One Piece</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/detail.css">
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>🔍 Détails de l'item</h1>
+      <a href="catalog.html" class="back-link">← Retour au catalogue</a>
+    </header>
+
+    <div id="loading" class="loading">Chargement des informations...</div>
+
+    <div id="itemDetail" class="detail-container" style="display: none;">
+      
+      <div class="gallery-section">
+        <div class="main-image-wrapper">
+          <img id="mainImage" src="" alt="Image Principale">
+        </div>
+        <div class="thumbnails" id="thumbnailsGrid">
+          </div>
+      </div>
+
+      <div class="info-section">
+        <div class="detail-header">
+          <h2 id="itemTitle" class="detail-title">Titre</h2>
+          <div class="item-meta">
+            <span id="itemCategory" class="item-badge badge-category">Catégorie</span>
+            <span id="itemSubcategory" class="item-badge badge-subcategory">Sous-catégorie</span>
+            <span id="itemYear" class="item-badge badge-year">Année</span>
+          </div>
+        </div>
+
+        <h3>Description</h3>
+        <div id="itemDescription" class="detail-description">
+          Description...
+        </div>
+
+        <a id="externalLink" href="#" target="_blank" class="btn-external" style="display: none;">
+          Voir la source externe 🔗
+        </a>
+      </div>
+
+    </div>
+  </div>
+  <div id="lightbox" class="lightbox">
+  <span class="close-lightbox">&times;</span>
+  <img class="lightbox-content" id="lightboxImage">
+  <div id="lightboxCaption"></div>
+</div>
+  <script src="js/detail.js"></script>
+</body>
+</html>

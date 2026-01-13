@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status,UploadFile, File
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
@@ -84,7 +84,6 @@ def get_item(
             detail="Item not found"
         )
     return item
-
 
 # ----------------
 # UPDATE

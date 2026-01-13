@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Back-office - Tous les items</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <a href="index.html">Retour</a>
+  <h1>Liste de tous les items (Back-office)</h1>
+  
+  <div id="itemsList">
+    <p>Chargement des items...</p>
+  </div>
+  <!-- Modal édition -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <h2>Modifier l'item</h2>
+    <form id="editForm">
+      <input type="hidden" id="editItemId">
+
+      <div class="form-group">
+        <label for="editTitle">Titre *</label>
+        <input type="text" id="editTitle" required>
+      </div>
+
+      <div class="form-group">
+        <label for="editDescription">Description</label>
+        <textarea id="editDescription" rows="4"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="editYear">Année</label>
+        <input type="number" id="editYear" min="1900" max="2030">
+      </div>
+
+      <div class="form-group">
+        <label for="editExternalLink">Lien externe</label>
+        <input type="url" id="editExternalLink">
+      </div>
+
+      <!-- Ajout d'images supplémentaires -->
+      <div class="form-group">
+        <label>Ajouter des images (secondaires)</label>
+        <input type="file" id="editImages" multiple accept="image/*">
+        <small>(Les images principales restent inchangées)</small>
+      </div>
+
+      <div style="margin-top: 25px;">
+        <button type="submit">Enregistrer les modifications</button>
+        <button type="button" onclick="closeModal()">Annuler</button>
+      </div>
+    </form>
+  </div>
+</div>
+  <script src="js/show.js"></script>
+</body>
+</html>
