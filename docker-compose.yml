@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # 1. Ton API Python (Backend)
   backend:
     build: 
       context: .
@@ -9,14 +8,4 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - .env  # Il va lire tes identifiants de BDD Terraform ici !
-
-  # 2. Ton Serveur Web Nginx (Frontend + Admin)
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-    depends_on:
-      - backend # Nginx attend que le backend soit allumé pour démarrer
+      - .env
