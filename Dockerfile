@@ -19,4 +19,4 @@ EXPOSE 8000
 # 7. La commande pour démarrer ton API
 # /!\ Attention: Remplace "app.main:app" par le nom de ton fichier de lancement si besoin.
 # Si ton fichier s'appelle main.py et que l'app s'appelle "app", c'est bon.
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--app-dir", "."]
