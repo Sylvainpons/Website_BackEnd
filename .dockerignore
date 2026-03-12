@@ -1,0 +1,16 @@
+# Ne pas copier les caches Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Ne pas copier les variables secrètes
+.env
+
+# Ne pas copier Git
+.git/
+
+# Ne pas copier tes clés privées (TRÈS IMPORTANT !)
+RSA_Key/
+
+# Ne pas copier le frontend (il ira sur Amazon S3)
+frontend/
